@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ТАП-МАНИЯ</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #1a1a2e;
+            font-family: Arial, sans-serif;
+            touch-action: manipulation;
+        }
+        .top-panel {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: rgba(22, 33, 62, 0.95);
+            text-align: center;
+            font-size: 28px;
+            color: #ffd700;
+            border-bottom: 2px solid #e94560;
+            z-index: 100;
+            font-weight: bold;
+        }
+        .top-panel span { color: #fff; font-size: 34px; }
+        .tap-area {
+            background: #16213e;
+            padding: 40px 30px;
+            border-radius: 30px;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            user-select: none;
+            width: 320px;
+            touch-action: manipulation;
+        }
+        .tap-area:active { transform: scale(0.95); }
+        .counter {
+            font-size: 100px;
+            color: #e94560;
+            font-weight: 900;
+            display: block;
+            line-height: 1;
+        }
+        .label {
+            font-size: 24px;
+            color: #fff;
+            margin-top: 10px;
+        }
+        .reset-btn {
+            margin-top: 25px;
+            background: #e94560;
+            border: none;
+            color: white;
+            padding: 14px 40px;
+            border-radius: 50px;
+            font-size: 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .reset-btn:hover { background: #c73652; }
+    </style>
+</head>
+<body>
+    <div class="top-panel">🪙 МОНЕТ: <span id="coinCounter">0</span></div>
+
+    <div class="tap-area" id="tapArea">
+        <span class="counter" id="counter">0</span>
+        <div class="label">👆 ТАПАЙ СЮДА</div>
+        <button class="reset-btn" id="resetBtn">🔄 СБРОСИТЬ</button>
+    </div>
+
+    <script>
+        let count = 0, coins = 0;
+        const counter = document.getElementById('counter');
+        const coinCounter = document.getElementById('coinCounter');
+        const tapArea = document.getElementById('tapArea');
+        const resetBtn = document.getElementById('resetBtn');
+
+        tapArea.addEventListener('click', function(e) {
+            if (e.target.tagName === 'BUTTON') return;
+            count++;
+            coins++;
+            counter.textContent = count;
+            coinCounter.textContent = coins;
+        });
+
+        resetBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            count = 0;
+            coins = 0;
+            counter.textContent = count;
+            coinCounter.textContent = coins;
+        });
+    </script>
+</body>
+</html>
